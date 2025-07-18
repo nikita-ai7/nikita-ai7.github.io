@@ -3,172 +3,170 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Nikita Sikarwar | Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
+  <title>Nikita Sikarwar — Portfolio</title>
   <style>
-    /* Reset & basics */
     * {
+      margin: 0;
+      padding: 0;
       box-sizing: border-box;
     }
     body {
-      margin: 0;
-      font-family: 'Montserrat', sans-serif;
-      background-color: var(--bg);
-      color: var(--text);
-      transition: background-color 0.3s ease, color 0.3s ease;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 1rem;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f4f7fa;
+      color: #333;
+      line-height: 1.6;
+      padding: 2rem;
     }
-    :root {
-      --bg: #f0f2f5;
-      --text: #111;
-      --primary: #4e9af1;
-      --card-bg: #fff;
-      --shadow: rgba(0,0,0,0.1);
-    }
-    [data-theme="dark"] {
-      --bg: #121212;
-      --text: #eee;
-      --primary: #4e9af1;
-      --card-bg: #1e1e1e;
-      --shadow: rgba(0,0,0,0.7);
-    }
-
     header {
-      width: 100%;
-      max-width: 900px;
       text-align: center;
       margin-bottom: 2rem;
     }
     header h1 {
-      margin: 0;
-      font-weight: 700;
-      font-size: 2.5rem;
-      letter-spacing: 2px;
+      font-size: 3rem;
+      color: #007acc;
     }
     header p {
-      margin: 0.25rem 0 1rem;
-      font-weight: 400;
-      color: var(--primary);
       font-size: 1.2rem;
+      color: #555;
     }
-
-    .toggle-theme {
-      cursor: pointer;
-      background: var(--primary);
-      border: none;
-      color: white;
-      padding: 0.5rem 1.2rem;
-      font-weight: 600;
-      border-radius: 25px;
-      transition: background 0.3s ease;
-      margin-bottom: 2rem;
-    }
-    .toggle-theme:hover {
-      background: #3b7ac9;
-    }
-
-    main {
-      width: 100%;
+    section {
+      background: #fff;
       max-width: 900px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.8rem;
+      margin: 1.5rem auto;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.1);
     }
-
-    .project-card {
-      background: var(--card-bg);
-      border-radius: 12px;
-      box-shadow: 0 8px 20px var(--shadow);
-      padding: 1.5rem;
+    h2 {
+      color: #007acc;
+      margin-bottom: 1rem;
+      border-bottom: 2px solid #007acc;
+      padding-bottom: 0.3rem;
+    }
+    ul.skills-list, ul.soft-skills, ul.certifications {
+      list-style: none;
+      padding: 0;
       display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      flex-wrap: wrap;
+      gap: 0.7rem;
     }
-    .project-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 12px 30px var(--shadow);
-    }
-    .project-card h3 {
-      margin: 0 0 0.7rem 0;
-      font-size: 1.4rem;
-      color: var(--primary);
-    }
-    .project-card p {
-      flex-grow: 1;
-      font-size: 1rem;
-      line-height: 1.4;
-      color: var(--text);
-      margin-bottom: 1.2rem;
-    }
-    .project-card a {
-      text-decoration: none;
-      font-weight: 600;
-      color: var(--primary);
-      border: 2px solid var(--primary);
-      padding: 0.5rem 1rem;
-      border-radius: 25px;
-      text-align: center;
-      transition: background-color 0.3s ease, color 0.3s ease;
-    }
-    .project-card a:hover {
-      background-color: var(--primary);
+    li {
+      background: #007acc;
       color: white;
-    }
-
-    footer {
-      margin-top: 3rem;
-      text-align: center;
+      padding: 0.4rem 0.9rem;
+      border-radius: 20px;
       font-size: 0.9rem;
-      color: var(--text);
-      opacity: 0.6;
     }
-
-    @media (max-width: 500px) {
-      header h1 {
-        font-size: 2rem;
-      }
-      .project-card p {
-        font-size: 0.9rem;
+    .contact p, .education p, .experience p {
+      margin-bottom: 0.8rem;
+    }
+    footer {
+      text-align: center;
+      margin-top: 2rem;
+      font-size: 0.9rem;
+      color: #666;
+    }
+    @media (max-width: 600px) {
+      body {
+        padding: 1rem;
       }
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>Nikita AI7</h1>
-    <p>Python Developer & Web Scraping Enthusiast</p>
-    <button class="toggle-theme" aria-label="Toggle Dark/Light Theme">Toggle Dark/Light</button>
+    <h1>Nikita Sikarwar</h1>
+    <p>Java Developer | Backend | Cloud | Automation</p>
   </header>
 
-  <main>
-    <section class="project-card">
-      <h3>AI Web Scraper</h3>
-      <p>A Python project using Selenium and BeautifulSoup to scrape websites with CAPTCHA handling. Fully automated and scalable for different targets.</p>
-      <a href="https://github.com/nikita-ai7/AI-Web-Scraper" target="_blank" rel="noopener">View on GitHub</a>
-    </section>
+  <section class="contact">
+    <h2>Contact</h2>
+    <p>📞 +91 9584396866</p>
+    <p>📧 <a href="mailto:nikitasikarwar1104@gmail.com">nikitasikarwar1104@gmail.com</a></p>
+    <p>🔗 <a href="https://linkedin.com/in/nikitasikarwar" target="_blank">linkedin.com/in/nikitasikarwar</a></p>
+  </section>
 
-    <!-- Add more project cards here -->
+  <section class="summary">
+    <h2>Professional Summary</h2>
+    <p>
+      Solution-oriented Software Developer with 2 years of experience in backend development, cloud computing, and automation. Proven ability to design and deploy scalable microservices using Java, Spring Boot, and SQL. Hands-on exposure to Google Cloud Platform services including BigQuery, Cloud Storage, and Cloud SQL. Experienced in CI/CD pipelines, Agile environments, and data process optimization. Passionate about enabling data-driven solutions with robust infrastructure and clean coding practices.
+    </p>
+  </section>
 
-  </main>
+  <section class="experience">
+    <h2>Work Experience</h2>
+    <p><strong>Associate Software Engineer</strong> | Accenture</p>
+    <p>July 2023 – Present</p>
+    <ul>
+      <li>Developed and deployed backend microservices using Java and Spring Boot, improving system throughput by 20%.</li>
+      <li>Designed and optimized complex SQL queries for large datasets, reducing data retrieval latency by 20%.</li>
+      <li>Integrated CI/CD pipelines via Jenkins and Maven, cutting deployment time by 30%.</li>
+      <li>Collaborated on GCP-based solutions involving Cloud SQL, IAM permissions, and data processing.</li>
+      <li>Maintained technical documentation and supported UAT testing with minimal downtime.</li>
+      <li>Worked in Agile sprints, aligning delivery with business and product teams.</li>
+    </ul>
+  </section>
+
+  <section class="education">
+    <h2>Education</h2>
+    <p><strong>Bachelor of Technology – Electrical Engineering</strong></p>
+    <p>Madhav Institute of Technology & Science, Madhya Pradesh, India</p>
+    <p><strong>CGPA:</strong> 8.8</p>
+  </section>
+
+  <section class="certifications">
+    <h2>Certifications</h2>
+    <ul class="certifications">
+      <li>Google Cloud Professional ML Engineer – Jun 2025</li>
+      <li>Google Cloud Associate Cloud Engineer – May 2025</li>
+      <li>Google Cloud Digital Leader – May 2025</li>
+      <li>Google Cloud Associate Data Practitioner – Apr 2025</li>
+      <li>Career Essentials in Data Analytics (Microsoft) – Dec 2022</li>
+      <li>AWS Cloud Practitioner Essentials – Jan 2022</li>
+    </ul>
+  </section>
+
+  <section class="skills">
+    <h2>Technical Skills</h2>
+    <ul class="skills-list">
+      <li>Java</li>
+      <li>SQL</li>
+      <li>Python</li>
+      <li>JavaScript</li>
+      <li>HTML</li>
+      <li>CSS</li>
+      <li>Spring Boot</li>
+      <li>Spring MVC</li>
+      <li>REST APIs</li>
+      <li>Google Cloud Platform</li>
+      <li>BigQuery</li>
+      <li>Cloud SQL</li>
+      <li>IAM</li>
+      <li>Kubernetes</li>
+      <li>MySQL</li>
+      <li>PostgreSQL</li>
+      <li>MongoDB (Basic)</li>
+      <li>Jenkins</li>
+      <li>Maven</li>
+      <li>Git</li>
+      <li>Agile/Scrum</li>
+      <li>SonarQube</li>
+      <li>Dataflow</li>
+      <li>Airflow</li>
+    </ul>
+  </section>
+
+  <section class="soft-skills">
+    <h2>Soft Skills</h2>
+    <ul class="soft-skills">
+      <li>Effective communicator with cross-functional teams</li>
+      <li>Fast learner with analytical problem-solving</li>
+      <li>Collaborative mindset with Agile adaptability</li>
+    </ul>
+  </section>
 
   <footer>
-    &copy; 2025 Nikita AI7 — Built with ❤️ and ☕
+    &copy; 2025 Nikita Sikarwar. All rights reserved.
   </footer>
-
-  <script>
-    const toggleBtn = document.querySelector('.toggle-theme');
-    toggleBtn.addEventListener('click', () => {
-      if(document.documentElement.getAttribute('data-theme') === 'dark') {
-        document.documentElement.removeAttribute('data-theme');
-      } else {
-        document.documentElement.setAttribute('data-theme', 'dark');
-      }
-    });
-  </script>
 </body>
 </html>
