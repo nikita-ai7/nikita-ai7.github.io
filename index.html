@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nikita Sikarwar — GenAI / AI Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:opsz,wght@14..32,400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F8F7FC;
+    --bg-card:#FFFFFF;
+    --bg-alt:#F1EEFA;
+    --line:#E2DCF0;
+    --ink:#1B1533;
+    --slate:#5F5A7D;
+    --slate-soft:#948FB0;
+    --teal:#7C3AED;
+    --teal-deep:#5B21B6;
+    --teal-wash:#F1EAFC;
+    --indigo:#E8890C;
+    --indigo-wash:#FDF0DC;
+    --radius:14px;
+    --maxw:1120px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    font-size:16px;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{font-family:'Space Grotesk',sans-serif; margin:0; letter-spacing:-0.01em;}
+  .mono{font-family:'JetBrains Mono',monospace;}
+  a{color:inherit;}
+  :focus-visible{outline:2px solid var(--teal); outline-offset:3px; border-radius:4px;}
+
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 32px;}
+
+  /* ---- Nav ---- */
+  nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(246,248,252,0.86); backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  nav .wrap{display:flex; align-items:center; justify-content:space-between; height:64px;}
+  .nav-mark{font-family:'Space Grotesk'; font-weight:700; font-size:18px; letter-spacing:-0.02em;}
+  .nav-mark .dot{color:var(--teal);}
+  .nav-links{display:flex; gap:28px; list-style:none; margin:0; padding:0;}
+  .nav-links a{
+    font-size:14px; font-weight:500; color:var(--slate); text-decoration:none;
+    padding:6px 2px; border-bottom:2px solid transparent; transition:color .15s, border-color .15s;
+  }
+  .nav-links a:hover{color:var(--ink); border-color:var(--teal);}
+  .nav-link-btn{
+    font-family:'Inter',sans-serif; font-size:14px; font-weight:500; color:var(--slate);
+    background:none; border:none; border-bottom:2px solid transparent; cursor:pointer;
+    padding:6px 2px; transition:color .15s, border-color .15s;
+  }
+  .nav-link-btn:hover{color:var(--ink); border-color:var(--teal);}
+  .nav-cta{
+    font-size:13px; font-weight:600; color:var(--teal-deep); border:1.5px solid var(--teal);
+    padding:7px 14px; border-radius:100px; text-decoration:none; white-space:nowrap;
+    transition:background .15s, color .15s;
+  }
+  .nav-cta:hover{background:var(--teal); color:#fff;}
+  .nav-toggle{display:none;}
+
+  /* ---- Hero ---- */
+  header.hero{padding:88px 0 64px; overflow:hidden; position:relative;}
+  .hero-grid{display:grid; grid-template-columns:1.15fr 0.85fr; gap:40px; align-items:center;}
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:'JetBrains Mono'; font-size:12.5px; color:var(--teal-deep);
+    background:var(--teal-wash); border:1px solid #CBEAE6; padding:5px 12px 5px 10px;
+    border-radius:100px; margin-bottom:22px; letter-spacing:0.01em;
+  }
+  .eyebrow-dot{width:6px; height:6px; border-radius:50%; background:var(--teal); animation:pulseDot 2.2s ease-in-out infinite;}
+  @keyframes pulseDot{0%,100%{opacity:1;} 50%{opacity:.35;}}
+  h1.name{font-size:52px; font-weight:700; line-height:1.05; margin-bottom:14px;}
+  .hero-role{font-size:21px; color:var(--slate); font-weight:500; margin-bottom:22px; max-width:520px;}
+  .hero-role b{color:var(--ink); font-weight:600;}
+  .hero-pitch{font-size:15.5px; color:var(--slate); max-width:490px; margin-bottom:30px;}
+  .hero-actions{display:flex; gap:12px; flex-wrap:wrap; margin-bottom:34px;}
+  .btn{
+    font-size:14.5px; font-weight:600; text-decoration:none; padding:12px 22px;
+    border-radius:10px; display:inline-flex; align-items:center; gap:8px; transition:transform .15s, box-shadow .15s;
+  }
+  .btn-primary{background:var(--ink); color:#fff;}
+  .btn-primary:hover{transform:translateY(-1px); box-shadow:0 8px 20px rgba(17,24,44,0.18);}
+  .btn-ghost{background:#fff; color:var(--ink); border:1.5px solid var(--line);}
+  .btn-ghost:hover{border-color:var(--teal); transform:translateY(-1px);}
+  .hero-meta{display:flex; gap:22px; flex-wrap:wrap; font-size:13.5px; color:var(--slate-soft);}
+  .hero-meta span{display:flex; align-items:center; gap:6px;}
+
+  /* signature node-graph */
+  .graph-wrap{position:relative; height:360px;}
+  .graph-wrap svg{width:100%; height:100%; overflow:visible;}
+  .edge{stroke:#C7D2E6; stroke-width:1.2;}
+  .edge-hot{stroke:var(--teal); stroke-width:1.6; opacity:0.85;}
+  .node{fill:var(--slate-soft); opacity:0.75;}
+  .node-hot{fill:var(--teal);}
+  .node-query{fill:var(--indigo);}
+  .graph-caption{
+    position:absolute; bottom:0; left:0; right:0; text-align:center;
+    font-family:'JetBrains Mono'; font-size:11.5px; color:var(--slate-soft); letter-spacing:0.02em;
+  }
+
+  /* ---- Section shell ---- */
+  section{padding:70px 0;}
+  .section-head{margin-bottom:36px; max-width:640px;}
+  .section-label{
+    font-family:'JetBrains Mono'; font-size:12.5px; color:var(--teal-deep);
+    text-transform:uppercase; letter-spacing:0.08em; margin-bottom:10px; display:block;
+  }
+  h2.section-title{font-size:30px; font-weight:700;}
+  .section-sub{color:var(--slate); font-size:15px; margin-top:10px;}
+  .band{background:var(--bg-alt); border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+
+  /* about */
+  .about-body{font-size:17px; color:var(--ink); max-width:760px; line-height:1.7;}
+  .about-body strong{color:var(--teal-deep);}
+
+  /* experience timeline */
+  .timeline{position:relative; padding-left:28px; border-left:2px solid var(--line);}
+  .tl-item{position:relative; padding-bottom:44px;}
+  .tl-item:last-child{padding-bottom:0;}
+  .tl-dot{
+    position:absolute; left:-35px; top:4px; width:14px; height:14px; border-radius:50%;
+    background:#fff; border:3px solid var(--teal);
+  }
+  .tl-date{font-family:'JetBrains Mono'; font-size:12.5px; color:var(--slate-soft); margin-bottom:6px; display:block;}
+  .tl-role{font-size:19px; font-weight:700; font-family:'Space Grotesk';}
+  .tl-org{color:var(--teal-deep); font-weight:600; font-size:14.5px; margin-bottom:14px;}
+  .tl-list{margin:0; padding-left:18px; color:var(--slate); font-size:14.5px; line-height:1.75;}
+  .tl-list li{margin-bottom:6px;}
+  .tl-list b{color:var(--ink);}
+
+  /* project */
+  .project-card{
+    background:var(--bg-card); border:1px solid var(--line); border-radius:var(--radius);
+    padding:36px; display:grid; grid-template-columns:1.3fr 1fr; gap:36px;
+  }
+  .project-tag{
+    display:inline-block; font-family:'JetBrains Mono'; font-size:11.5px; color:var(--indigo);
+    background:var(--indigo-wash); padding:4px 10px; border-radius:6px; margin-bottom:14px;
+  }
+  .project-card h3{font-size:23px; margin-bottom:12px;}
+  .project-desc{color:var(--slate); font-size:14.5px; margin-bottom:18px;}
+  .stack-row{display:flex; flex-wrap:wrap; gap:8px;}
+  .chip{
+    font-family:'JetBrains Mono'; font-size:12px; color:var(--ink); background:var(--bg-alt);
+    border:1px solid var(--line); padding:5px 10px; border-radius:7px;
+  }
+  .stat-grid{display:grid; grid-template-columns:1fr 1fr; gap:18px;}
+  .stat{background:var(--bg-alt); border-radius:10px; padding:18px;}
+  .stat-num{font-family:'Space Grotesk'; font-weight:700; font-size:28px; color:var(--teal-deep);}
+  .stat-label{font-size:12.5px; color:var(--slate); margin-top:4px;}
+
+  /* skills */
+  .skills-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:28px;}
+  .skill-group{background:var(--bg-card); border:1px solid var(--line); border-radius:var(--radius); padding:24px;}
+  .skill-group h4{font-family:'Space Grotesk'; font-size:15.5px; margin-bottom:14px;}
+  .skill-tags{display:flex; flex-wrap:wrap; gap:7px;}
+  .skill-tags .chip{background:var(--bg-alt);}
+
+  /* certifications */
+  .cert-row{display:grid; grid-template-columns:repeat(3,1fr); gap:16px;}
+  .cert{
+    background:var(--bg-card); border:1px solid var(--line); border-radius:12px; padding:18px 20px;
+    display:flex; align-items:flex-start; gap:12px;
+  }
+  .cert-badge{
+    width:34px; height:34px; border-radius:9px; background:var(--teal-wash); color:var(--teal-deep);
+    display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk'; font-weight:700; font-size:14px;
+    flex-shrink:0;
+  }
+  .cert-name{font-size:14px; font-weight:600; line-height:1.4;}
+  .cert-year{font-family:'JetBrains Mono'; font-size:11.5px; color:var(--slate-soft); margin-top:2px;}
+
+  /* education */
+  .edu-card{
+    background:var(--bg-card); border:1px solid var(--line); border-radius:var(--radius);
+    padding:26px 30px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;
+  }
+  .edu-card h4{font-family:'Space Grotesk'; font-size:17px;}
+  .edu-card p{margin:4px 0 0; color:var(--slate); font-size:14px;}
+  .edu-date{font-family:'JetBrains Mono'; font-size:13px; color:var(--slate-soft);}
+
+  /* footer / contact */
+  footer{padding:70px 0 50px;}
+  .contact-card{
+    background:var(--ink); color:#fff; border-radius:20px; padding:52px 48px;
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:24px;
+  }
+  .contact-card h2{color:#fff; font-size:28px; margin-bottom:8px;}
+  .contact-card p{color:#AEB6CE; font-size:14.5px; margin:0; max-width:420px;}
+  .contact-actions{display:flex; gap:12px; flex-wrap:wrap;}
+  .btn-on-dark{background:var(--teal); color:#fff;}
+  .btn-on-dark:hover{background:var(--teal-deep); transform:translateY(-1px);}
+  .btn-outline-dark{border:1.5px solid #333B57; color:#fff; background:transparent;}
+  .btn-outline-dark:hover{border-color:var(--teal);}
+  .footer-note{text-align:center; color:var(--slate-soft); font-size:12.5px; margin-top:28px; font-family:'JetBrains Mono';}
+
+  #email-toast{
+    position:fixed; left:50%; bottom:28px; transform:translateX(-50%) translateY(20px);
+    background:var(--ink); color:#fff; font-family:'Inter'; font-size:13.5px; font-weight:500;
+    padding:12px 20px; border-radius:10px; box-shadow:0 10px 30px rgba(0,0,0,0.2);
+    opacity:0; pointer-events:none; transition:opacity .2s, transform .2s; z-index:200;
+  }
+  #email-toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
+
+  @media (max-width:860px){
+    .nav-links{display:none;}
+    .hero-grid{grid-template-columns:1fr;}
+    .graph-wrap{height:220px; order:-1;}
+    h1.name{font-size:38px;}
+    .hero-role{font-size:18px;}
+    .project-card{grid-template-columns:1fr;}
+    .stat-grid{grid-template-columns:1fr 1fr;}
+    .skills-grid{grid-template-columns:1fr;}
+    .cert-row{grid-template-columns:1fr;}
+    .contact-card{padding:36px 26px; flex-direction:column; align-items:flex-start;}
+    .wrap{padding:0 20px;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .eyebrow-dot{animation:none;}
+    #pulse{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="nav-mark">nikita<span class="dot">·</span>sikarwar</div>
+    <ul class="nav-links">
+      <li><button class="nav-link-btn" data-target="about">About</button></li>
+      <li><button class="nav-link-btn" data-target="experience">Experience</button></li>
+      <li><button class="nav-link-btn" data-target="project">Project</button></li>
+      <li><button class="nav-link-btn" data-target="skills">Skills</button></li>
+      <li><button class="nav-link-btn" data-target="certifications">Certifications</button></li>
+    </ul>
+    <a class="nav-cta email-btn" href="mailto:nikitasikarwar1104@gmail.com">Get in touch</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow"><span class="eyebrow-dot"></span>Open to AI Engineering roles</span>
+      <h1 class="name">Nikita Sikarwar</h1>
+      <p class="hero-role">GenAI / AI Engineer — <b>RAG pipelines, LLM apps &amp; production AI systems</b></p>
+      <p class="hero-pitch">I build GenAI systems that go from prototype to production: retrieval-augmented generation pipelines, LLM-powered assistants, and the backend infrastructure that makes them usable at enterprise scale.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary email-btn" href="mailto:nikitasikarwar1104@gmail.com">Email me</a>
+        <a class="btn btn-ghost" href="https://www.linkedin.com/in/nikitasikarwar" target="_blank" rel="noopener">LinkedIn ↗</a>
+      </div>
+      <div class="hero-meta">
+        <span>📍 Pune, Maharashtra, India</span>
+        <span>🎓 4× Google Cloud Certified</span>
+        <span>💼 3+ yrs · Accenture</span>
+      </div>
+    </div>
+    <div class="graph-wrap" aria-hidden="true">
+      <svg viewBox="0 0 320 320">
+        <line class="edge" x1="160" y1="160" x2="70" y2="70"/>
+        <line class="edge" x1="160" y1="160" x2="245" y2="55"/>
+        <line class="edge" x1="70" y1="70" x2="40" y2="150"/>
+        <line class="edge" x1="245" y1="55" x2="270" y2="140"/>
+        <line class="edge" x1="160" y1="160" x2="60" y2="235"/>
+        <line class="edge" x1="160" y1="160" x2="230" y2="250"/>
+        <line class="edge" x1="60" y1="235" x2="120" y2="290"/>
+        <line class="edge" x1="230" y1="250" x2="190" y2="295"/>
+        <line class="edge-hot" x1="160" y1="160" x2="115" y2="120" id="hotline1"/>
+        <line class="edge-hot" x1="160" y1="160" x2="205" y2="115" id="hotline2"/>
+        <line class="edge-hot" x1="160" y1="160" x2="130" y2="205" id="hotline3"/>
+
+        <circle class="node" cx="70" cy="70" r="5"/>
+        <circle class="node" cx="245" cy="55" r="4"/>
+        <circle class="node" cx="40" cy="150" r="4"/>
+        <circle class="node" cx="270" cy="140" r="5"/>
+        <circle class="node" cx="60" cy="235" r="4"/>
+        <circle class="node" cx="230" cy="250" r="5"/>
+        <circle class="node" cx="120" cy="290" r="4"/>
+        <circle class="node" cx="190" cy="295" r="4"/>
+
+        <circle class="node-hot" cx="115" cy="120" r="6"/>
+        <circle class="node-hot" cx="205" cy="115" r="6"/>
+        <circle class="node-hot" cx="130" cy="205" r="6"/>
+
+        <circle class="node-query" cx="160" cy="160" r="10"/>
+        <circle cx="160" cy="160" r="18" fill="var(--indigo)" opacity="0.12"/>
+
+        <circle id="pulse" r="4" fill="var(--teal-deep)">
+          <animateMotion dur="2.6s" repeatCount="indefinite"
+            path="M160,160 L115,120 M115,120 L160,160 M160,160 L205,115 M205,115 L160,160 M160,160 L130,205 M130,205 L160,160" />
+        </circle>
+      </svg>
+      <div class="graph-caption">query → nearest-neighbor retrieval</div>
+    </div>
+  </div>
+</header>
+
+<section id="about">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-label">01 · About</span>
+      <h2 class="section-title">Shipping AI that holds up in production</h2>
+    </div>
+    <p class="about-body">Over the past 3 years at Accenture, I've architected a <strong>GPT-4-powered enterprise knowledge assistant</strong> (Python, FastAPI, Azure OpenAI) that improved information retrieval speed by 40% and cut redundant API calls by 30%. I also built an end-to-end <strong>RAG pipeline</strong> — semantic chunking, embeddings, vector search, and prompt orchestration — that boosted answer accuracy by 40% across large document repositories, and helped standardize reusable chatbot components that cut frontend delivery time by 35% across client engagements. I'm 4× Google Cloud certified, including Professional Machine Learning Engineer, and I'm currently exploring AI Engineer / GenAI Engineer roles at product-focused teams where I can own AI systems end-to-end.</p>
+  </div>
+</section>
+
+<section id="experience" class="band">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-label">02 · Experience</span>
+      <h2 class="section-title">Where I've built this</h2>
+    </div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <span class="tl-date">DEC 2025 — PRESENT</span>
+        <div class="tl-role">Software Engineer</div>
+        <div class="tl-org">Accenture, Pune</div>
+        <ul class="tl-list">
+          <li>Architected an <b>embedded AI assistant</b> (React, Python, FastAPI, Azure OpenAI GPT-4) integrated into enterprise applications, improving self-service efficiency by ~30% through secure real-time natural language interactions.</li>
+          <li>Built a <b>RAG-based document intelligence pipeline</b> — semantic chunking, embeddings, vector search, prompt orchestration — improving answer accuracy by ~40% and cutting hallucinated responses by ~25%.</li>
+          <li>Accelerated delivery of enterprise conversational AI (ChatGPT-style apps) by ~40% using React, TypeScript, FastAPI, MongoDB, and Azure OpenAI GPT-4 across multiple clients.</li>
+          <li>Standardized reusable React/TypeScript chatbot components, cutting frontend development effort by ~35% across implementations.</li>
+          <li>Implemented authorization, request validation, and audit logging in Python controllers for AI-generated response traceability, meeting enterprise compliance standards.</li>
+        </ul>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <span class="tl-date">JUL 2023 — DEC 2025</span>
+        <div class="tl-role">Associate Software Engineer</div>
+        <div class="tl-org">Accenture, Pune</div>
+        <ul class="tl-list">
+          <li>Reduced incident response time by 35% by building an <b>alert automation platform</b> integrating Jira and ServiceNow APIs.</li>
+          <li>Automated escalation workflows (Java, Angular, Node.js, MySQL), cutting manual intervention ~40% while maintaining real-time audit records.</li>
+          <li>Minimized production downtime ~25% through application troubleshooting and cross-functional deployment support.</li>
+          <li>Improved application quality via unit, integration, and end-to-end testing prior to production releases.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="project">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-label">03 · Featured project</span>
+      <h2 class="section-title">Enterprise Document Intelligence Platform</h2>
+      <p class="section-sub">A retrieval-augmented generation system for querying large, unstructured document repositories in natural language.</p>
+    </div>
+    <div class="project-card">
+      <div>
+        <span class="project-tag">RAG · Vector Search</span>
+        <h3>Grounded answers over enterprise knowledge bases</h3>
+        <p class="project-desc">Built an end-to-end RAG pipeline — semantic chunking, embedding generation, vector search, and prompt orchestration — to let enterprise users query large document repositories in plain language, with responses grounded in retrieved source content rather than model memory alone.</p>
+        <div class="stack-row">
+          <span class="chip">Python</span>
+          <span class="chip">FastAPI</span>
+          <span class="chip">OpenAI API</span>
+          <span class="chip">FAISS</span>
+          <span class="chip">React</span>
+        </div>
+      </div>
+      <div class="stat-grid">
+        <div class="stat"><div class="stat-num">+40%</div><div class="stat-label">Answer accuracy via RAG grounding</div></div>
+        <div class="stat"><div class="stat-num">−50%</div><div class="stat-label">Information retrieval time</div></div>
+        <div class="stat"><div class="stat-num">−30%</div><div class="stat-label">End-to-end inference latency</div></div>
+        <div class="stat"><div class="stat-num">−25%</div><div class="stat-label">Hallucinated responses</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills" class="band">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-label">04 · Skills</span>
+      <h2 class="section-title">Stack</h2>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <h4>Generative AI</h4>
+        <div class="skill-tags">
+          <span class="chip">Azure OpenAI GPT-4</span>
+          <span class="chip">RAG</span>
+          <span class="chip">Prompt Engineering</span>
+          <span class="chip">Embeddings</span>
+          <span class="chip">Vector Search</span>
+          <span class="chip">LangChain</span>
+          <span class="chip">LangGraph</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4>Backend &amp; APIs</h4>
+        <div class="skill-tags">
+          <span class="chip">Python</span>
+          <span class="chip">FastAPI</span>
+          <span class="chip">REST APIs</span>
+          <span class="chip">Microservices</span>
+          <span class="chip">Auth &amp; Validation</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4>Frontend</h4>
+        <div class="skill-tags">
+          <span class="chip">React.js</span>
+          <span class="chip">TypeScript</span>
+          <span class="chip">Angular</span>
+          <span class="chip">JavaScript</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4>Data &amp; Storage</h4>
+        <div class="skill-tags">
+          <span class="chip">MongoDB</span>
+          <span class="chip">PostgreSQL</span>
+          <span class="chip">MySQL</span>
+          <span class="chip">FAISS</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4>Cloud &amp; DevOps</h4>
+        <div class="skill-tags">
+          <span class="chip">GCP</span>
+          <span class="chip">BigQuery</span>
+          <span class="chip">Vertex AI</span>
+          <span class="chip">AWS</span>
+          <span class="chip">Docker</span>
+          <span class="chip">CI/CD</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4>Languages</h4>
+        <div class="skill-tags">
+          <span class="chip">Python</span>
+          <span class="chip">Java</span>
+          <span class="chip">TypeScript</span>
+          <span class="chip">SQL</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="certifications">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-label">05 · Certifications</span>
+      <h2 class="section-title">4× Google Cloud Certified</h2>
+    </div>
+    <div class="cert-row">
+      <div class="cert">
+        <div class="cert-badge">ML</div>
+        <div><div class="cert-name">Professional Machine Learning Engineer</div><div class="cert-year">Google Cloud · 2025</div></div>
+      </div>
+      <div class="cert">
+        <div class="cert-badge">CE</div>
+        <div><div class="cert-name">Associate Cloud Engineer</div><div class="cert-year">Google Cloud · 2025</div></div>
+      </div>
+      <div class="cert">
+        <div class="cert-badge">DL</div>
+        <div><div class="cert-name">Digital Leader</div><div class="cert-year">Google Cloud · 2025</div></div>
+      </div>
+      <div class="cert">
+        <div class="cert-badge">DP</div>
+        <div><div class="cert-name">Associate Data Practitioner</div><div class="cert-year">Google Cloud · 2025</div></div>
+      </div>
+      <div class="cert">
+        <div class="cert-badge">CP</div>
+        <div><div class="cert-name">AWS Cloud Practitioner</div><div class="cert-year">AWS · 2022</div></div>
+      </div>
+      <div class="cert">
+        <div class="cert-badge">AI</div>
+        <div><div class="cert-name">Agentic AI Essentials</div><div class="cert-year">AWS Partner</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="education" class="band">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-label">06 · Education</span>
+    </div>
+    <div class="edu-card">
+      <div>
+        <h4>Madhav Institute of Technology &amp; Science, Gwalior</h4>
+        <p>Bachelor of Technology</p>
+      </div>
+      <div class="edu-date">2019 — 2023</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="contact-card">
+      <div>
+        <h2>Let's talk</h2>
+        <p>Open to AI Engineer, GenAI Engineer, and LLM Engineer roles at product-focused teams. Happy to connect.</p>
+      </div>
+      <div class="contact-actions">
+        <a class="btn btn-on-dark email-btn" href="mailto:nikitasikarwar1104@gmail.com">nikitasikarwar1104@gmail.com</a>
+        <a class="btn btn-outline-dark" href="https://www.linkedin.com/in/nikitasikarwar" target="_blank" rel="noopener">LinkedIn ↗</a>
+      </div>
+    </div>
+    <div class="footer-note">Pune, Maharashtra, India</div>
+  </div>
+</footer>
+
+<div id="email-toast">Email copied — nikitasikarwar1104@gmail.com</div>
+
+<script>
+  document.querySelectorAll('.nav-link-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var target = document.getElementById(btn.getAttribute('data-target'));
+      if(target){ target.scrollIntoView({behavior:'smooth', block:'start'}); }
+    });
+  });
+
+  function fallbackCopy(text){
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.left = '-9999px';
+    document.body.appendChild(ta);
+    ta.focus();
+    ta.select();
+    try{ document.execCommand('copy'); }catch(err){}
+    document.body.removeChild(ta);
+  }
+
+  function showToast(){
+    var toast = document.getElementById('email-toast');
+    toast.classList.add('show');
+    clearTimeout(window._toastTimer);
+    window._toastTimer = setTimeout(function(){ toast.classList.remove('show'); }, 2600);
+  }
+
+  document.querySelectorAll('.email-btn').forEach(function(btn){
+    btn.addEventListener('click', function(e){
+      e.preventDefault();
+      var email = 'nikitasikarwar1104@gmail.com';
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(email).then(showToast).catch(function(){
+          fallbackCopy(email);
+          showToast();
+        });
+      } else {
+        fallbackCopy(email);
+        showToast();
+      }
+    });
+  });
+</script>
+</body>
+</html>
