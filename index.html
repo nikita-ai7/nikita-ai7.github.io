@@ -207,6 +207,14 @@
   .btn-outline-dark:hover{border-color:var(--teal);}
   .footer-note{text-align:center; color:var(--slate-soft); font-size:12.5px; margin-top:28px; font-family:'JetBrains Mono';}
 
+  #email-toast{
+    position:fixed; left:50%; bottom:28px; transform:translateX(-50%) translateY(20px);
+    background:var(--ink); color:#fff; font-family:'Inter'; font-size:13.5px; font-weight:500;
+    padding:12px 20px; border-radius:10px; box-shadow:0 10px 30px rgba(0,0,0,0.2);
+    opacity:0; pointer-events:none; transition:opacity .2s, transform .2s; z-index:200;
+  }
+  #email-toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
+
   @media (max-width:860px){
     .nav-links{display:none;}
     .hero-grid{grid-template-columns:1fr;}
@@ -238,7 +246,7 @@
       <li><button class="nav-link-btn" data-target="skills">Skills</button></li>
       <li><button class="nav-link-btn" data-target="certifications">Certifications</button></li>
     </ul>
-    <a class="nav-cta" href="mailto:nikitasikarwar1104@gmail.com">Get in touch</a>
+    <a class="nav-cta email-btn" href="mailto:nikitasikarwar1104@gmail.com">Get in touch</a>
   </div>
 </nav>
 
@@ -250,7 +258,7 @@
       <p class="hero-role">GenAI / AI Engineer — <b>RAG pipelines, LLM apps &amp; production AI systems</b></p>
       <p class="hero-pitch">I build GenAI systems that go from prototype to production: retrieval-augmented generation pipelines, LLM-powered assistants, and the backend infrastructure that makes them usable at enterprise scale.</p>
       <div class="hero-actions">
-        <a class="btn btn-primary" href="mailto:nikitasikarwar1104@gmail.com">Email me</a>
+        <a class="btn btn-primary email-btn" href="mailto:nikitasikarwar1104@gmail.com">Email me</a>
         <a class="btn btn-ghost" href="https://www.linkedin.com/in/nikitasikarwar" target="_blank" rel="noopener">LinkedIn ↗</a>
       </div>
       <div class="hero-meta">
@@ -504,7 +512,7 @@
         <p>Open to AI Engineer, GenAI Engineer, and LLM Engineer roles at product-focused teams. Happy to connect.</p>
       </div>
       <div class="contact-actions">
-        <a class="btn btn-on-dark" href="mailto:nikitasikarwar1104@gmail.com">nikitasikarwar1104@gmail.com</a>
+        <a class="btn btn-on-dark email-btn" href="mailto:nikitasikarwar1104@gmail.com">nikitasikarwar1104@gmail.com</a>
         <a class="btn btn-outline-dark" href="https://www.linkedin.com/in/nikitasikarwar" target="_blank" rel="noopener">LinkedIn ↗</a>
       </div>
     </div>
@@ -512,11 +520,48 @@
   </div>
 </footer>
 
+<div id="email-toast">Email copied — nikitasikarwar1104@gmail.com</div>
+
 <script>
   document.querySelectorAll('.nav-link-btn').forEach(function(btn){
     btn.addEventListener('click', function(){
       var target = document.getElementById(btn.getAttribute('data-target'));
       if(target){ target.scrollIntoView({behavior:'smooth', block:'start'}); }
+    });
+  });
+
+  function fallbackCopy(text){
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.left = '-9999px';
+    document.body.appendChild(ta);
+    ta.focus();
+    ta.select();
+    try{ document.execCommand('copy'); }catch(err){}
+    document.body.removeChild(ta);
+  }
+
+  function showToast(){
+    var toast = document.getElementById('email-toast');
+    toast.classList.add('show');
+    clearTimeout(window._toastTimer);
+    window._toastTimer = setTimeout(function(){ toast.classList.remove('show'); }, 2600);
+  }
+
+  document.querySelectorAll('.email-btn').forEach(function(btn){
+    btn.addEventListener('click', function(e){
+      e.preventDefault();
+      var email = 'nikitasikarwar1104@gmail.com';
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(email).then(showToast).catch(function(){
+          fallbackCopy(email);
+          showToast();
+        });
+      } else {
+        fallbackCopy(email);
+        showToast();
+      }
     });
   });
 </script>
